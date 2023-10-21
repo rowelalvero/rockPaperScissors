@@ -7,27 +7,25 @@
 </head>
 <body>
     <script>
-        let game = true
+        let game = true;
         Startgame();
         function Startgame() {
+            
+            
             while (game) {
-                
+                var you = 0;
+                var computerScore = 0;
+                var gameCount = 0;
                 for (let i = 0; i < 5; i++) {
-                    let you = 0
-                    let computerScore = 0
-
+                    
+                    gameCount++
                     const playerSelection = playerSelect();
                     const computerSelection = getComputerChoice();
 
-                    console.log("Score");
-                    console.log("You: " + you);
-                    console.log("Computer: " + computerScore);
-
-                    const result = playRound(playerSelection, computerSelection, you, computerScore)
-                    console.log(result)
-
+                    const result = playRound(playerSelection, computerSelection);
+                    console.log(result);
+                    console.log("Score: " + "You: " + you + " Computer: " + computerScore + " Game " + gameCount + " out of " + "5");
                     
-
                     function playerSelect() {
                         return prompt("Choose character: Rock, Paper, Scissors");
                     }
@@ -45,7 +43,7 @@
                     }
                 }
 
-                function playRound(playerSelection, computerSelection, you, computerScore) {
+                function playRound(playerSelection, computerSelection) {
                     const player = playerSelection.toLowerCase();
                     const computer = computerSelection.toLowerCase();
 
@@ -57,14 +55,13 @@
                         player === "paper" && computer === "rock" ||
                         player === "scissors" && computer === "paper") {
 
-                        return "You win! " + player + " beats " + computer
                         you++
-
+                        return "You win! " + player + " beats " + computer
                         }
 
                     else {
-                        return "Computer wins! " + computer + " equals " + player
                         computerScore++
+                        return "Computer wins! " + computer + " equals " + player
                     }
                     
                 }
@@ -79,6 +76,7 @@
                     console.log("Nice Game!");
                     game = false
                 }
+                
                 else {
                     continue
                 }

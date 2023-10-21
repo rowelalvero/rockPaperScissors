@@ -7,47 +7,90 @@
 </head>
 <body>
     <script>
-        const playerSelection = playerSelect();
-        const computerChoice = getComputerChoice();
-        const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection))
-
-        function getComputerChoice() {
-            const randomNum = Math.random();
-
-            if (randomNum < 0.33) {
-                return 'Rock';
-            } else if (randomNum < 0.67) {
-                return 'Paper';
-            } else {
-                return 'Scissors';
-            }
-        }
-
-        function playerSelect() {
-            return prompt("Choose character: Rock, Paper, Scissors");
-        }
-
-        function playRound(playerSelection, computerSelection) {
-
-            const player = playerSelection.toLowerCase();
-            const computer = computerSelection.toLowerCase();
-
-            if (player === computer) {
-                console.log("It's a tie! " + player + " equals " + computer)
-            }
-
-            else if (player === "rock" && computer === "scissors" ||
-                player === "paper" && computer === "rock" ||
-                player === "scissors" && computer === "paper") {
+        let game = true
+        Startgame();
+        function Startgame() {
+            while (game) {
                 
-                console.log("You win! " + player + " beats " + computer)
-            }
-            else {
-                console.log("Computer wins! " + computer + " equals " + player)
-            }
+                for (let i = 0; i < 5; i++) {
+                    let you = 0
+                    let computerScore = 0
 
+                    const playerSelection = playerSelect();
+                    const computerSelection = getComputerChoice();
+
+                    console.log("Score");
+                    console.log("You: " + you);
+                    console.log("Computer: " + computerScore);
+
+                    const result = playRound(playerSelection, computerSelection, you, computerScore)
+                    console.log(result)
+
+                    
+
+                    function playerSelect() {
+                        return prompt("Choose character: Rock, Paper, Scissors");
+                    }
+
+                    function getComputerChoice() {
+                        const randomNum = Math.random();
+
+                        if (randomNum < 0.33) {
+                            return 'Rock';
+                        } else if (randomNum < 0.67) {
+                            return 'Paper';
+                        } else {
+                            return 'Scissors';
+                        }
+                    }
+                }
+
+                function playRound(playerSelection, computerSelection, you, computerScore) {
+                    const player = playerSelection.toLowerCase();
+                    const computer = computerSelection.toLowerCase();
+
+                    if (player === computer) {
+                        return "It's a tie! " + player + " equals " + computer
+                    }
+
+                    else if (player === "rock" && computer === "scissors" ||
+                        player === "paper" && computer === "rock" ||
+                        player === "scissors" && computer === "paper") {
+
+                        return "You win! " + player + " beats " + computer
+                        you++
+
+                        }
+
+                    else {
+                        return "Computer wins! " + computer + " equals " + player
+                        computerScore++
+                    }
+                    
+                }
+                const playAgainResult = playAgain();
+                const playOneMore = playAgainResult.toLowerCase();
+
+                function playAgain() {
+                return prompt("Play Again? Yes or No");
+                }
+
+                if (playOneMore === 'no') {
+                    console.log("Nice Game!");
+                    game = false
+                }
+                else {
+                    continue
+                }
+                
+            }
         }
+        
+
+        
+        
+            
+        
         
         
     </script>
